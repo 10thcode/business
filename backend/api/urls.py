@@ -63,7 +63,7 @@ urlpatterns = [
             product_image_details
     ),
     path(
-            "businesses/<business_id>/products/favorites/",
+            "businesses/<business_id>/products/<product_id>/favorites/",
             product_favorite_list
     ),
     path(
@@ -81,19 +81,26 @@ urlpatterns = [
             product_review_details
     ),
     path(
-            "notifications/",
-            notification_list
-    ),
-    path(
-            "notifications/<notification_id>/",
-            notification_details
-    ),
-    path(
-            "users/notifications/",
+            "users/<user_id>/notifications/",
             user_notification_list
     ),
     path(
-            "users/notifications/<user_notification_id>/",
+            "users/<user_id>/notifications/<user_notification_id>/",
             user_notification_details
+    ),
+    path(
+            "users/<user_id>/favorites/products",
+            user_favorite_product_list
+
+    ),
+    path(
+            "users/<user_id>/favorites/businesses",
+            user_favorite_business_list
+
+    ),
+    path(
+            "ratings/",
+            project_ratings
+
     ),
 ]

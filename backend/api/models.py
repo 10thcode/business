@@ -18,14 +18,18 @@ class Business(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user_id = models.CharField(max_length=120)
     name = models.CharField(max_length=60)
-    category = models.CharField(max_length=60, blank=True)
+    category = models.CharField(max_length=60)
+    other_category = models.CharField(max_length=60, blank=True)
+    short_description = models.CharField(max_length=120)
+    long_description = models.CharField(max_length=360, blank=True)
     address = models.CharField(max_length=60, blank=True)
     country_code = models.CharField(max_length=3, blank=True)
     phone = models.CharField(max_length=10, blank=True)
     email = models.EmailField(blank=True)
-    image = models.ImageField(upload_to='images/businesses/', blank=True)
-    short_description = models.CharField(max_length=120, blank=True)
-    long_description = models.CharField(max_length=360, blank=True)
+    website = models.URLField(blank=True)
+    image = models.ImageField(
+            upload_to='images/businesses/',
+            default="defaults/default.webp")
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
 
@@ -93,7 +97,7 @@ class BusinessFavorite(models.Model):
             related_name="business_favorites",
             on_delete=models.CASCADE
     )
-    user_id = models.CharField(max_length=120, unique=True)
+    user_id = models.CharField(max_length=120)
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
 
@@ -141,11 +145,13 @@ class Product(models.Model):
             on_delete=models.CASCADE
     )
     name = models.CharField(max_length=60)
-    image = models.ImageField(upload_to='images/products', blank=True)
-    short_description = models.CharField(max_length=120, blank=True)
+    image = models.ImageField(
+            upload_to='images/products',
+            default="defaults/default.webp")
+    short_description = models.CharField(max_length=120)
     long_description = models.CharField(max_length=360, blank=True)
-    price = models.DecimalField(max_digits=14, decimal_places=2, blank=True)
-    negotiable = models.BooleanField(default=False)
+    currency = models.CharField(max_length=3)
+    amount = models.DecimalField(max_digits=14, decimal_places=2)
     availability = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
@@ -191,7 +197,7 @@ class ProductFavorite(models.Model):
             related_name="product_favorites",
             on_delete=models.CASCADE
     )
-    user_id = models.CharField(max_length=120, unique=True)
+    user_id = models.CharField(max_length=120)
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
 
@@ -222,19 +228,6 @@ class ProductReview(models.Model):
     modified_at = models.DateTimeField(auto_now=True)
 
 
-class Notification(models.Model):
-    """
-    Notification model: Details about a notification
-
-    This where details about a notification is stored.
-    """
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    title = models.CharField(max_length=60)
-    content = models.CharField(max_length=120)
-    created_at = models.DateTimeField(auto_now_add=True)
-    modified_at = models.DateTimeField(auto_now=True)
-
-
 class UserNotification(models.Model):
     """
     User notification model: Details about a user notification
@@ -246,12 +239,24 @@ class UserNotification(models.Model):
     can be sent to multiple users.
     """
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    notification = models.ForeignKey(
-            Notification,
-            related_name="notifications",
-            on_delete=models.CASCADE
-    )
     user_id = models.CharField(max_length=120)
-    read = models.BooleanField(default=False)
+    title = models.CharField(max_length=60)
+    content = models.CharField(max_length=360)
+    created_at = models.DateTimeField(auto_now_add=True)
+    modified_at = models.DateTimeField(auto_now=True)
+
+
+class ProjectRating(models.Model):
+    """
+    Project Rating model: Details about a project rating
+
+    This ia where details about a project rating is stored
+
+    Anyone can add a project rating anonymously
+    """
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    name = models.CharField(max_length=60, blank=True)
+    rating = models.IntegerField()
+    content = models.CharField(max_length=120)
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)

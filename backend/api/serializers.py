@@ -155,19 +155,19 @@ class ProductReviewSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class NotificationSerializer(serializers.ModelSerializer):
-    """
-    Serialize and deserialize notification model data
-    """
-    class Meta:
-        model = Notification
-        fields = '__all__'
-
-
 class UserNotificationSerializer(serializers.ModelSerializer):
     """
     Serialize and deserialize user notification model data
     """
     class Meta:
         model = UserNotification
+        fields = '__all__'
+
+
+class ProjectRatingSerializer(serializers.ModelSerializer):
+    """
+    Serialize and deserialize project ratings
+    """
+    class Meta:
+        model = ProjectRating
         fields = '__all__'
