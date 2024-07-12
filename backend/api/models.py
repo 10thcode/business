@@ -257,6 +257,6 @@ class ProjectRating(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=60, blank=True)
     rating = models.IntegerField()
-    content = models.CharField(max_length=120)
+    content = models.CharField(max_length=360)
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
