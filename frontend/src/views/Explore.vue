@@ -121,8 +121,10 @@
       <BusinessCard 
         @click="$router.push(`/explore/businesses/${business.id}`)"
         v-for="business in businesses"
+        :key="business.id"
         :name="business.name"
         :description="business.short_description"
+        :country_code="business.country_code"
         :phone="business.phone"
         :address="business.address"
         :favorites="business.favorites_count"
