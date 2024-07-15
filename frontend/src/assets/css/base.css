@@ -1,0 +1,41 @@
+@import './reset.css';
+
+@font-face {
+    font-family: 'Stara';
+    src: url('../fonts/StaraBlack.otf') format('opentype');
+    font-weight: 900;
+    font-style: normal;
+}
+
+/* color palette */
+:root {
+  --primary: #001A41;
+  --secondary: #F9F9FF;
+  --tertiary: #E8E7EE;
+  --tertiary-container: #E2E2E9;
+  --on-tertiary: #44474F;
+  --faded-text: #6B7695;
+  --accent: #445E91;
+  --warning: #E14343;
+  --warning-container: #FFF9FA;
+  --outline: #C4C6D0;
+  --dialog-background: rgba(255, 255, 255, 0.9);
+}
+
+body {
+  min-height: 100vh;
+  color: var(--primary);
+  background: white;
+  transition:
+    color 0.5s,
+    background-color 0.5s;
+  font-family: Lato, sans-serif;
+  font-size: 14px;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scroll-behavior: smooth;
+}
