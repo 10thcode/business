@@ -56,6 +56,7 @@
     if (await isAuthenticated.value) {
       user_id.value = user.value.sub;
     }
+    loading.value = false;
   })
 </script>
 
