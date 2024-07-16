@@ -78,6 +78,7 @@
     if (!await isAuthenticated.value) {
       router.push('/account/login');
     }
+    loading.value = false;
   });
 </script>
 
