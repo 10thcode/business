@@ -159,6 +159,7 @@
   .images-container {
     display: flex;
     gap: 64px;
+    flex-wrap: wrap;
     justify-content: center;
   }
 
