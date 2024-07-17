@@ -33,6 +33,8 @@
     emit('close');
     loading.value = false;
   }
+
+  loading.value = false;
 </script>
 
 <template>
